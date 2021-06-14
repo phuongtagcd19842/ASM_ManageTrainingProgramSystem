@@ -9,7 +9,7 @@ namespace ASM_ManageTrainingProgramSystem.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ASM_ManageTrainingProgramSystem.Models.ApplicationDbContext context)
