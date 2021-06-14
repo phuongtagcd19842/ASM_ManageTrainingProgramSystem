@@ -25,6 +25,8 @@ namespace ASM_ManageTrainingProgramSystem.Models
         {
         }
 
+        public DbSet<TrainerInfo> TrainersInfo { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
