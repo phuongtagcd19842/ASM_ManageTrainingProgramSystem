@@ -14,7 +14,7 @@ namespace ASM_ManageTrainingProgramSystem.Models
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         public string TrainerName { get; set; }
-        public int ExternalOrInternal { get; set; }
+        public string ExternalOrInternal { get; set; }
         public string WorkingPlace { get; set; }
         public string Telephone { get; set; }
         public string EmailAddress { get; set; }
