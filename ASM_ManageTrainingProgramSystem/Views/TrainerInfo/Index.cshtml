@@ -1,0 +1,26 @@
+﻿@model ASM_ManageTrainingProgramSystem.Models.TrainerInfo
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My User Information</h2>
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        <p>Name: @Model.TrainerName</p>
+        <p>Type: @Model.ExternalOrInternal</p>
+        <p>WorkingPlace: @Model.WorkingPlace</p>
+        <p>Telephone: @Model.Telephone</p>
+        <p>EmailAddress: @Model.EmailAddress</p>
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.ActionLink(
+             "Edit My Profile",
+             "Edit",
+             "TrainerInfo",
+             null,
+             new { @class = "btn btn-info" }
+             )
+</div>
