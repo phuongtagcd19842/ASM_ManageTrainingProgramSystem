@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Course Categories</h2>
+
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <th scope="row">@category.Id</th>
+                <td>@category.CategoryName</td>
+                <td>@category.Description</td>
+                <td>
+                        <!--Details button-->
+                        @Html.ActionLink("Details",
+                            "Details",
+                            "Categories",
+                            new { id = category.Id },
+                            new { @class = "btn btn-info" }
+                       )
+                        <!--Edit button-->
+                        @Html.ActionLink("Edit",
+                            "Edit",
+                            "Categories",
+                            new { id = category.Id },
+                            new { @class = "btn btn-default" }
+                       )
+                        <!--Delete button-->
+                        @Html.ActionLink("Delete",
+                            "Delete",
+                            "Categories",
+                            new { id = category.Id },
+                            new { @class = "btn btn-danger" }
+                       )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
