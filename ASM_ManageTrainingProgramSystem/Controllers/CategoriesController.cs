@@ -1,4 +1,5 @@
 ﻿using ASM_ManageTrainingProgramSystem.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,15 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             _context = new ApplicationDbContext();
         }
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             var categories = _context.Categories.ToList();
+
+            if(!searchString.IsNullOrWhiteSpace())
+            {
+                categories = categories.Where(c => c.CategoryName.Contains(searchString)).ToList();
+            }    
+
             return View(categories);
         }
 

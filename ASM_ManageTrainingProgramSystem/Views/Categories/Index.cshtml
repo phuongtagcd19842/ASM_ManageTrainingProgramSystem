@@ -13,6 +13,14 @@
     )
 </div>
 
+@using(Html.BeginForm("Index", "Categories", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.TextBox("searchString", null, new { @placeholder = "Search category by name", required = "required"})
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
+}
+
 <table class="table">
     <thead class="thead-light">
         <tr>
