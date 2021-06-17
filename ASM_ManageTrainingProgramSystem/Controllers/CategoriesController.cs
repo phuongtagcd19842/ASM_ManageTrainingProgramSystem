@@ -69,5 +69,18 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var category = _context.Categories.SingleOrDefault(c => c.Id == id);
+
+            if (category == null) return HttpNotFound();
+
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
