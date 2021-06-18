@@ -9,10 +9,10 @@ using System.Web.Mvc;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
-    public class TrainerInfoController : Controller
-    {
+	public class TrainersController : Controller
+	{
 		private ApplicationDbContext _context;
-		public TrainerInfoController()
+		public TrainersController()
 		{
 			_context = new ApplicationDbContext();
 		}
@@ -54,5 +54,5 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
 			return RedirectToAction("Index");
 		}
-    }
+	}
 }

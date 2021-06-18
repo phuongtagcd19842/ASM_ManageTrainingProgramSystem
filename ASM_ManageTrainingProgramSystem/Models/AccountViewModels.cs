@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ASM_ManageTrainingProgramSystem.Models
@@ -67,6 +68,56 @@ namespace ASM_ManageTrainingProgramSystem.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
+
+    public class TrainerRegisterViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Username")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string TrainerName { get; set; }
+        [Display(Name = "Type")]
+        public string ExternalOrInternal { get; set; }
+        [Display(Name = "Working Place")]
+        public string WorkingPlace { get; set; }
+        [Display(Name = "Telephone")]
+        public string Telephone { get; set; }
+        [Display(Name = "Email Address")]
+        public string EmailAddress { get; set; }
+    }
+
+    public class TrainingStaffRegisterViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Username")]
         public string Email { get; set; }
 
         [Required]
