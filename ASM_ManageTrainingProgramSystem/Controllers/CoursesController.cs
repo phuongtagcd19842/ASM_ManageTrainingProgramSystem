@@ -23,11 +23,11 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             var courses = _context.Courses
                 .Include(c => c.Category)
                 .ToList();
-            
-            if(!searchString.IsNullOrWhiteSpace())
+
+            if (!searchString.IsNullOrWhiteSpace())
             {
                 courses = courses.Where(c => c.CourseName.Contains(searchString)).ToList();
-            }    
+            }
 
             return View(courses);
         }
@@ -69,7 +69,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit (int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
@@ -87,9 +87,9 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit (Course course)
+        public ActionResult Edit(Course course)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var viewModel = new CourseCategoriesViewModel()
                 {
@@ -108,6 +108,21 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             courseInDb.CategoryId = course.CategoryId;
             courseInDb.Description = course.Description;
 
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            var course = _context.Courses
+                .SingleOrDefault(c => c.Id == id);
+
+            if (course == null) return HttpNotFound();
+
+            _context.Courses.Remove(course);
             _context.SaveChanges();
 
             return RedirectToAction("Index");
