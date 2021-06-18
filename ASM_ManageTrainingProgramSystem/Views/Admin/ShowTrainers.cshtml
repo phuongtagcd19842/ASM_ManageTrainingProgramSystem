@@ -5,26 +5,68 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Trainers List</h2>
-        <ul>
-            @Html.ActionLink(
-             "Create a new Trainer",
-             "CreateTrainer",
-             "Account",
-             null,
-             new { @class = "btn btn-primary" }
-             )
-        </ul>
-        <br />
-        <ul>
-            <li class="list-group-item active">
-                All Trainers
-            </li>
-            @foreach (var Trainer in Model)
-            {
-                <li class="list-group-item">@Trainer.UserName</li>
-            }
-        </ul>
+    <h2>Trainers List</h2>
+    <hr />
+    <ul>
+    @Html.ActionLink(
+        "Create a new Trainer",
+        "CreateTrainer",
+        "Account",
+        null,
+        new { @class = "btn btn-primary" }
+        )
+    </ul>
+    <hr />
     </div>
 </div>
+<li class="list-group-item active">
+    All Trainers
+</li>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var TrainerInfo in Model)
+         {
+            <tr>
+                <td>@TrainerInfo.UserName</td>
+                <td>
+                @Html.ActionLink(
+                                "Details",
+                                "Details",
+                                "Admin",
+                                new { id = TrainerInfo.Id },
+                                new { @class = "btn btn-primary" }
+                                )
+                @Html.ActionLink(
+                                "Edit",
+                                "Edit",
+                                "Admin",
+                                new { id = TrainerInfo.Id },
+                                new { @class = "btn btn-default" }
+                                )
+                @Html.ActionLink(
+                                "Delete",
+                                "Delete",
+                                "Admin",
+                                new { id = TrainerInfo.Id },
+                                new { @class = "btn btn-danger" }
+                                )
+                @Html.ActionLink(
+                                "Change Password",
+                                "ChangePassword",
+                                "Admin",
+                                new { id = TrainerInfo.Id },
+                                new { @class = "btn btn-danger" }
+                                )
+                </td>
+            </tr>
+         }
+    </tbody>
+</table>
+
 

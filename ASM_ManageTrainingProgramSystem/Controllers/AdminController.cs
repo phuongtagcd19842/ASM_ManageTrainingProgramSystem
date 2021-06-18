@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -60,6 +61,63 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 			}
 
 			return View(Trainer);
+		}
+
+		public ActionResult Details(string id)
+		{
+			if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			var userId = id;
+			var trainerInfo = _context.TrainersInfo.SingleOrDefault(u => u.UserId.Equals(id));
+
+			if (trainerInfo == null) return HttpNotFound();
+
+			return View(trainerInfo);
+		}
+
+		[HttpGet]
+		public ActionResult Delete(string id)
+		{
+			if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			var userId = id;
+			var userInfo = _context.TrainersInfo.SingleOrDefault(u => u.UserId.Equals(id));
+			var user = _context.Users.SingleOrDefault(u => u.Id.Equals(id));
+
+			if (user == null) return HttpNotFound();
+			_context.TrainersInfo.Remove(userInfo);
+			_context.Users.Remove(user);
+			_context.SaveChanges();
+
+			return RedirectToAction("ShowTrainers");
+		}
+
+		[HttpGet]
+		public ActionResult Edit(string id)
+		{
+			var userId = id;
+			var trainerInfo = _context.TrainersInfo.SingleOrDefault(u => u.UserId.Equals(id));
+
+			if (trainerInfo == null) return HttpNotFound();
+
+			return View(trainerInfo);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(TrainerInfo trainerInfo)
+		{
+			var TrainerInfoInDb = _context.TrainersInfo.SingleOrDefault(u => u.UserId.Equals(trainerInfo.UserId));
+
+			if (trainerInfo == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			TrainerInfoInDb.TrainerName = trainerInfo.TrainerName;
+			TrainerInfoInDb.ExternalOrInternal = trainerInfo.ExternalOrInternal;
+			TrainerInfoInDb.WorkingPlace = trainerInfo.WorkingPlace;
+			TrainerInfoInDb.Telephone = trainerInfo.Telephone;
+			TrainerInfoInDb.EmailAddress = trainerInfo.EmailAddress;
+			_context.SaveChanges();
+
+			return RedirectToAction("ShowTrainers");
 		}
 	}
 }
