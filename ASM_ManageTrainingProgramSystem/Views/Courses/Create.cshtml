@@ -1,0 +1,31 @@
+﻿@model ASM_ManageTrainingProgramSystem.ViewModels.CourseCategoriesViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create a new Course</h2>
+
+@using (Html.BeginForm("Create", "Courses", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(c => c.Course.CourseName)
+        @Html.TextBoxFor(c => c.Course.CourseName, new { @class = "form-control", @placeholder = "Enter course name" })
+        @Html.ValidationMessageFor(c => c.Course.CourseName, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Course.Category.CategoryName)
+        @Html.DropDownListFor(c => c.Course.CategoryId,
+                              new SelectList(Model.Categories, "Id", "CategoryName"),
+                              new { @class = "form-control", }
+                              )
+        @Html.ValidationMessageFor(c => c.Course.CategoryId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Course.Description)
+        @Html.TextBoxFor(c => c.Course.Description, new { @class = "form-control", @placeholder = "Enter description" })
+        @Html.ValidationMessageFor(c => c.Course.CourseName, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+}
