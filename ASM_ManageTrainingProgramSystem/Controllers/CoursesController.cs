@@ -67,5 +67,50 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Edit (int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            var courseInDb = _context.Courses
+                .SingleOrDefault(c => c.Id == id);
+
+            if (courseInDb == null) return HttpNotFound();
+
+            var viewModel = new CourseCategoriesViewModel()
+            {
+                Course = courseInDb,
+                Categories = _context.Categories.ToList()
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit (Course course)
+        {
+            if(!ModelState.IsValid)
+            {
+                var viewModel = new CourseCategoriesViewModel()
+                {
+                    Course = course,
+                    Categories = _context.Categories.ToList()
+                };
+                return View(viewModel);
+            }
+
+            var courseInDb = _context.Courses
+                .SingleOrDefault(c => c.Id == course.Id);
+
+            if (courseInDb == null) return HttpNotFound();
+
+            courseInDb.CourseName = course.CourseName;
+            courseInDb.CategoryId = course.CategoryId;
+            courseInDb.Description = course.Description;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

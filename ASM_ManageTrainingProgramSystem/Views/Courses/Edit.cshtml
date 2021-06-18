@@ -1,15 +1,16 @@
 ﻿@model ASM_ManageTrainingProgramSystem.ViewModels.CourseCategoriesViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create a new Course</h2>
+<h2>Edit Course</h2>
 
-@using (Html.BeginForm("Create", "Courses", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Courses", FormMethod.Post))
 {
+    @Html.HiddenFor(c => c.Course.Id)
     <div class="form-group">
         @Html.LabelFor(c => c.Course.CourseName)
-        @Html.TextBoxFor(c => c.Course.CourseName, new { @class = "form-control", @placeholder = "Enter course name" })
+        @Html.EditorFor(c => c.Course.CourseName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(c => c.Course.CourseName, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
@@ -22,10 +23,10 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Course.Description)
-        @Html.TextBoxFor(c => c.Course.Description, new { @class = "form-control", @placeholder = "Enter description" })
+        @Html.EditorFor(c => c.Course.Description, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(c => c.Course.CourseName, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create a new Course</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
     </div>
 }
