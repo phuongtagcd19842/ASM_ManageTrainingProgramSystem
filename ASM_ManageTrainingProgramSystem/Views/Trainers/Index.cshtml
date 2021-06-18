@@ -3,14 +3,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>My User Information</h2>
+<h2>My Information</h2>
 
 <div class="panel panel-info">
     <div class="panel-body">
-        <p>Name: @Model.TrainerName</p>
-        <p>Type: @Model.ExternalOrInternal</p>
+        <p>Name:         @Model.TrainerName</p>
+        <p>Type:         @Model.ExternalOrInternal</p>
         <p>WorkingPlace: @Model.WorkingPlace</p>
-        <p>Telephone: @Model.Telephone</p>
+        <p>Telephone:    @Model.Telephone</p>
         <p>EmailAddress: @Model.EmailAddress</p>
     </div>
 </div>
@@ -19,7 +19,7 @@
     @Html.ActionLink(
              "Edit My Profile",
              "Edit",
-             "TrainerInfo",
+             "Trainers",
              null,
              new { @class = "btn btn-info" }
              )

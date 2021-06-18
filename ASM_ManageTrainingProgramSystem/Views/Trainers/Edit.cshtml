@@ -5,7 +5,7 @@
 
 <h2>Edit Profile</h2>
 
-@using (Html.BeginForm("Edit", "TrainerInfo", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Trainers", FormMethod.Post))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.UserId)
@@ -37,4 +37,3 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 }
-
