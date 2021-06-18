@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using ASM_ManageTrainingProgramSystem.ViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -17,11 +18,17 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             _context = new ApplicationDbContext();
         }
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             var courses = _context.Courses
                 .Include(c => c.Category)
                 .ToList();
+            
+            if(!searchString.IsNullOrWhiteSpace())
+            {
+                courses = courses.Where(c => c.CourseName.Contains(searchString)).ToList();
+            }    
+
             return View(courses);
         }
 
