@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ASM_ManageTrainingProgramSystem.ViewModels;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -115,6 +116,47 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 			TrainerInfoInDb.WorkingPlace = trainerInfo.WorkingPlace;
 			TrainerInfoInDb.Telephone = trainerInfo.Telephone;
 			TrainerInfoInDb.EmailAddress = trainerInfo.EmailAddress;
+			_context.SaveChanges();
+
+			return RedirectToAction("ShowTrainers");
+		}
+
+		[HttpGet]
+		public ActionResult ChangePassword(string id)
+		{
+			if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			var userId = id;
+			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(id));
+
+			if (UserInDb == null) return HttpNotFound();
+
+			var viewModel = new ChangePasswordTrainerViewModel()
+			{
+				NewPassword = UserInDb.PasswordHash,
+				ConfirmPassword = UserInDb.PasswordHash
+			};
+			return View(viewModel);
+		}
+
+		[HttpPost]
+		public ActionResult ChangePassword(ApplicationUser user)
+		{
+			if (User == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			var viewModel = new ChangePasswordTrainerViewModel()
+				{
+					NewPassword = user.PasswordHash,
+					ConfirmPassword = user.PasswordHash
+				};
+			return View(viewModel);
+
+			var userId = user.Id;
+			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(user.Id));
+
+			if (UserInDb == null) return HttpNotFound();
+
+			UserInDb.PasswordHash = user.PasswordHash;
+
 			_context.SaveChanges();
 
 			return RedirectToAction("ShowTrainers");

@@ -209,11 +209,6 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "Training Staff");
-                    var TrainingStaff = new TrainerInfo
-                    {
-                        UserId = user.Id
-                    };
-                    _context.TrainersInfo.Add(TrainingStaff);
                     _context.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
