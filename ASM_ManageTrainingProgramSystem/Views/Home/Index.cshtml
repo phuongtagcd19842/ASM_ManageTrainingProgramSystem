@@ -11,7 +11,11 @@
     {
         <h1>Welcome Trainer</h1>
     }
+    @if (User.IsInRole("Training Staff"))
+    {
+    <h1>Welcome Training Staff</h1>
+    }
 
-    <h1>FPT Manage Training Program System</h1>
+    <h2>FPT Manage Training Program System</h2>
     <p class="lead">An professional application to manage tasks.</p>
 </div>

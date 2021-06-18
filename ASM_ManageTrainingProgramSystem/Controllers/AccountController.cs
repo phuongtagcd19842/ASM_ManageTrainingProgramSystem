@@ -192,6 +192,39 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult CreateTrainingStaff()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> CreateTrainingStaff(TrainingStaffRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "Training Staff");
+                    var TrainingStaff = new TrainerInfo
+                    {
+                        UserId = user.Id
+                    };
+                    _context.TrainersInfo.Add(TrainingStaff);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
         //
         // POST: /Account/Register
         [HttpPost]
