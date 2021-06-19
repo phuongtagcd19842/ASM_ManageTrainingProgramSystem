@@ -28,6 +28,7 @@ namespace ASM_ManageTrainingProgramSystem.Models
         public DbSet<TrainerInfo> TrainersInfo { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<TrainerCourse> TrainerCourses { get; set; }
 
         public static ApplicationDbContext Create()
         {

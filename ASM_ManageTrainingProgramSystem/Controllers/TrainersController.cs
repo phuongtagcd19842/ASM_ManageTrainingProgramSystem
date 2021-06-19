@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -54,5 +55,19 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
 			return RedirectToAction("Index");
 		}
+
+		public ActionResult ViewAssignedCourse()
+        {
+			var userId = User.Identity.GetUserId();
+			var CourseAssigned = _context.TrainerCourses
+				.Where(c => c.UserId.Equals(userId))
+				.Include(c => c.Course)
+				.Select(c => c.Course)
+				.ToList();
+
+			if (CourseAssigned == null) return HttpNotFound();
+
+			return View(CourseAssigned);
+        }
 	}
 }

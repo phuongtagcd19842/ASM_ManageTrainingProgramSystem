@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.Course>
+@{
+    ViewBag.Title = "ViewAssignedCourse";
+}
+
+<h2>My Assigned Courses</h2>
+<hr/>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Course Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.CourseName</td>
+                <td>@course.Description</td>
+                <td>@course.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
