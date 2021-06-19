@@ -6,17 +6,17 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Trainers List</h2>
-        <hr />
+        <hr/>
         <ul>
             @Html.ActionLink(
                 "Create a new Trainer",
                 "CreateTrainer",
                 "Account",
                 null,
-                new { @class = "btn btn-primary" }
+                new { @class = "btn btn-success" }
                 )
         </ul>
-        <hr />
+        <hr/>
     </div>
 </div>
 <li class="list-group-item active">
@@ -61,7 +61,7 @@
                                     "ChangePassword",
                                     "Admin",
                                     new { id = TrainerInfo.Id },
-                                    new { @class = "btn btn-danger" }
+                                    new { @class = "btn btn-warning" }
                                     )
                 </td>
             </tr>

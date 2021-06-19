@@ -6,25 +6,62 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Training Staffs List</h2>
+        <hr/>
         <ul>
             @Html.ActionLink(
              "Create a new Training Staff",
              "CreateTrainingStaff",
              "Account",
              null,
-             new { @class = "btn btn-primary" }
+             new { @class = "btn btn-success" }
              )
         </ul>
-        <br />
-        <ul>
-            <li class="list-group-item active">
-                All Training Staffs
-            </li>
-            @foreach (var TrainingStaff in Model)
-            {
-                <li class="list-group-item">@TrainingStaff.UserName</li>
-            }
-        </ul>
+        <hr />
     </div>
 </div>
+    <li class="list-group-item active">
+        All Training Staffs
+    </li>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var TrainingStaff in Model)
+        {
+            <tr>
+                <td>@TrainingStaff.UserName</td>
+                <td>@TrainingStaff.Email</td>
+                <td>
+                @Html.ActionLink(
+                                "Edit",
+                                "EditTrainingStaff",
+                                "Admin",
+                                new { id = TrainingStaff.Id },
+                                new { @class = "btn btn-default" }
+                                )
+                @Html.ActionLink(
+                                "Delete",
+                                "DeleteTrainingStaff",
+                                "Admin",
+                                new { id = TrainingStaff.Id },
+                                new { @class = "btn btn-danger" }
+                                )
+                @Html.ActionLink(
+                                "Change Password",
+                                "ChangePassword",
+                                "Admin",
+                                new { id = TrainingStaff.Id },
+                                new { @class = "btn btn-warning" }
+                                )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 

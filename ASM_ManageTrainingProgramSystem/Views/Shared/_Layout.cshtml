@@ -30,6 +30,7 @@
                     else if (User.IsInRole("Trainer"))
                     {
                         <li> @Html.ActionLink("My Profile", "Index", "Trainers") </li>
+                        <li> @Html.ActionLink("My Assiged Courses", "ViewAssignedCourse", "Trainers") </li>
                     }
                     <li>@Html.ActionLink("Categories List", "Index", "Categories")</li>
                     <li>@Html.ActionLink("Courses List", "Index", "Courses")</li>

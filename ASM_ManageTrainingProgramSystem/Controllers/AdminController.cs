@@ -122,19 +122,56 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult ChangePassword(string id)
+		public ActionResult DeleteTrainingStaff(string id)
 		{
 			if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
+			var userId = id;
+			var user = _context.Users.SingleOrDefault(u => u.Id.Equals(id));
+
+			if (user == null) return HttpNotFound();
+			_context.Users.Remove(user);
+			_context.SaveChanges();
+
+			return RedirectToAction("ShowTrainingStaffs");
+		}
+
+		[HttpGet]
+		public ActionResult EditTrainingStaff(string id)
+		{
 			var userId = id;
 			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(id));
 
 			if (UserInDb == null) return HttpNotFound();
 
+			return View(UserInDb);
+		}
+
+		[HttpPost]
+		public ActionResult EditTrainingStaff(ApplicationUser user)
+		{
+			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(user.Id));
+
+			if (UserInDb == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			UserInDb.Email = user.Email;
+			_context.SaveChanges();
+
+			return RedirectToAction("ShowTrainingStaffs");
+		}
+
+		[HttpGet]
+		public ActionResult ChangePassword(string id)
+		{
+			if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			var userId = User.Identity.GetUserId();
+			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(id));
+
+			if (UserInDb == null) return HttpNotFound();
 			var viewModel = new ChangePasswordTrainerViewModel()
 			{
-				NewPassword = UserInDb.PasswordHash,
-				ConfirmPassword = UserInDb.PasswordHash
+				NewPassword = UserInDb.PasswordHash
 			};
 			return View(viewModel);
 		}
@@ -142,24 +179,24 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 		[HttpPost]
 		public ActionResult ChangePassword(ApplicationUser user)
 		{
-			if (User == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			var viewModel = new ChangePasswordTrainerViewModel()
+			if (!ModelState.IsValid)
+			{
+				var viewModel = new ChangePasswordTrainerViewModel()
 				{
-					NewPassword = user.PasswordHash,
-					ConfirmPassword = user.PasswordHash
+					NewPassword = user.PasswordHash
 				};
-			return View(viewModel);
+				return View(user);
+			}
 
-			var userId = user.Id;
+			var userId = User.Identity.GetUserId();
 			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(user.Id));
 
 			if (UserInDb == null) return HttpNotFound();
 
 			UserInDb.PasswordHash = user.PasswordHash;
-
 			_context.SaveChanges();
-
 			return RedirectToAction("ShowTrainers");
+
 		}
 	}
 }
