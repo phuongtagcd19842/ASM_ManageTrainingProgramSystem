@@ -50,7 +50,7 @@ namespace ASM_ManageTrainingProgramSystem.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Username")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -67,7 +67,7 @@ namespace ASM_ManageTrainingProgramSystem.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Username")]
         public string Email { get; set; }
 
         [Required]

@@ -146,11 +146,9 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 			var viewModel = new ChangePasswordTrainerViewModel()
 				{
 					NewPassword = user.PasswordHash,
-					ConfirmPassword = user.PasswordHash
 				};
 			return View(viewModel);
 
-			var userId = user.Id;
 			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(user.Id));
 
 			if (UserInDb == null) return HttpNotFound();
@@ -160,6 +158,45 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 			_context.SaveChanges();
 
 			return RedirectToAction("ShowTrainers");
+		}
+
+		[HttpGet]
+		public ActionResult DeleteTrainingStaff(string id)
+		{
+			if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			var userId = id;
+			var user = _context.Users.SingleOrDefault(u => u.Id.Equals(id));
+
+			if (user == null) return HttpNotFound();
+			_context.Users.Remove(user);
+			_context.SaveChanges();
+
+			return RedirectToAction("ShowTrainingStaffs");
+		}
+
+		[HttpGet]
+		public ActionResult EditTrainingStaff(string id)
+		{
+			var userId = id;
+			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(id));
+
+			if (UserInDb == null) return HttpNotFound();
+
+			return View(UserInDb);
+		}
+
+		[HttpPost]
+		public ActionResult EditTrainingStaff(ApplicationUser user)
+		{
+			var UserInDb = _context.Users.SingleOrDefault(u => u.Id.Equals(user.Id));
+
+			if (UserInDb == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+			UserInDb.Email = user.Email;
+			_context.SaveChanges();
+
+			return RedirectToAction("ShowTrainingStaffs");
 		}
 	}
 }
