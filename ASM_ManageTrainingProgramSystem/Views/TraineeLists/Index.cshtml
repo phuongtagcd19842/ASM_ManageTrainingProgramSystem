@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Trainees List</h2>
 
 @Html.ActionLink("Create a new Trainee",
                         "CreateTrainee",
@@ -30,7 +30,7 @@
                         "Details",
                         "TraineeLists",
                         new { id = traineeInfo.Id },
-                        new { @class = "btn btn-default" }
+                        new { @class = "btn btn-primary" }
                    )
                     <!--Edit button-->
                     @Html.ActionLink("Edit",
