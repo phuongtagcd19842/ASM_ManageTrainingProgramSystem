@@ -205,6 +205,10 @@
     <Compile Include="Migrations\202106220958599_Add_TraineeInfo_Table.Designer.cs">
       <DependentUpon>202106220958599_Add_TraineeInfo_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106221425245_ModifyDataTypeOfTraineeInfo.cs" />
+    <Compile Include="Migrations\202106221425245_ModifyDataTypeOfTraineeInfo.Designer.cs">
+      <DependentUpon>202106221425245_ModifyDataTypeOfTraineeInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -326,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106220958599_Add_TraineeInfo_Table.resx">
       <DependentUpon>202106220958599_Add_TraineeInfo_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106221425245_ModifyDataTypeOfTraineeInfo.resx">
+      <DependentUpon>202106221425245_ModifyDataTypeOfTraineeInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
