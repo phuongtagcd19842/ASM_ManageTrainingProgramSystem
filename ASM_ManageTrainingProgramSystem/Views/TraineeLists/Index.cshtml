@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.ActionLink("Create a new Trainee",
+                        "CreateTrainee",
+                        "Account",
+                        null,
+                        new { @class = "btn btn-primary" }
+                   )
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var traineeInfo in Model)
+        {
+            <tr>
+                <td>@traineeInfo.UserName</td>
+                <td>
+                    <!--Details button-->
+                    @Html.ActionLink("Details",
+                        "Details",
+                        "TraineeLists",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-default" }
+                   )
+                    <!--Edit button-->
+                    @Html.ActionLink("Edit",
+                        "Edit",
+                        "TraineeLists",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-default" }
+                   )
+                    <!--Delete button-->
+                    @Html.ActionLink("Delete",
+                        "Delete",
+                        "TraineeLists",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-danger" }
+                   )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

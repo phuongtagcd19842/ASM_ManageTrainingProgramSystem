@@ -218,7 +218,46 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        [HttpGet]
+        [Authorize(Roles = "Training Staff")]
+        public ActionResult CreateTrainee()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "Training Staff")]
+        public async Task<ActionResult> CreateTrainee(TraineeRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "Trainee");
+                    var traineeInfo = new TraineeInfo
+                    {
+                        TraineeName = model.TraineeName,
+                        Age = model.Age,
+                        DateOfBirth = model.DateOfBirth,
+                        Education = model.Education,
+                        ProgrammingLanguage = model.ProgrammingLanguage,
+                        TOEICScore = model.TOEICScore,
+                        ExperienceDetail = model.ExperienceDetail,
+                        Department = model.Department,
+                        Location = model.Location,
+                        UserId = user.Id
+                    };
+                    _context.TraineesInfo.Add(traineeInfo);
+                    _context.SaveChanges();
 
+                    return RedirectToAction("Index", "TraineeLists");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
 
         //
         // POST: /Account/Register
