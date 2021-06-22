@@ -1,0 +1,35 @@
+﻿@model ASM_ManageTrainingProgramSystem.Models.TraineeInfo
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Trainee</h2>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Trainee Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Date Of Birth</th>
+            <th scope="col">Education</th>
+            <th scope="col">Programming Language</th>
+            <th scope="col">TOEIC Score</th>
+            <th scope="col">Experience Detail</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.TraineeName</td>
+            <td>@Model.Age</td>
+            <td>@Model.DateOfBirth</td>
+            <td>@Model.Education</td>
+            <td>@Model.ProgrammingLanguage</td>
+            <td>@Model.TOEICScore</td>
+            <td>@Model.ExperienceDetail</td>
+            <td>@Model.Department</td>
+            <td>@Model.Location</td>
+        </tr>
+    </tbody>
+</table>

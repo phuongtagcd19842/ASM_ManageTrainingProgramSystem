@@ -46,6 +46,12 @@
                         new { id = traineeInfo.Id },
                         new { @class = "btn btn-danger" }
                    )
+                    @Html.ActionLink("Courses",
+                        "Courses",
+                        "TraineeLists",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-info" }
+                    )
                 </td>
             </tr>
         }
