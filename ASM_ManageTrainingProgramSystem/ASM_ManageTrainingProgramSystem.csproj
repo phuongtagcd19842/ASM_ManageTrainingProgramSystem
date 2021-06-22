@@ -201,12 +201,17 @@
     <Compile Include="Migrations\202106192158203_AddTrainerCoursesTable.Designer.cs">
       <DependentUpon>202106192158203_AddTrainerCoursesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106220958599_Add_TraineeInfo_Table.cs" />
+    <Compile Include="Migrations\202106220958599_Add_TraineeInfo_Table.Designer.cs">
+      <DependentUpon>202106220958599_Add_TraineeInfo_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TraineeInfo.cs" />
     <Compile Include="Models\TrainerCourse.cs" />
     <Compile Include="Models\TrainerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -318,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106192158203_AddTrainerCoursesTable.resx">
       <DependentUpon>202106192158203_AddTrainerCoursesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106220958599_Add_TraineeInfo_Table.resx">
+      <DependentUpon>202106220958599_Add_TraineeInfo_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
