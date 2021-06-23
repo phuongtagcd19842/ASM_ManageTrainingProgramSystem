@@ -1,11 +1,11 @@
 ﻿@model ASM_ManageTrainingProgramSystem.Models.TrainerInfo
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "EditTrainer";
 }
 
 <h2>Edit Trainer Profile</h2>
 
-@using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+@using (Html.BeginForm("EditTrainer", "Admin", FormMethod.Post))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.UserId)

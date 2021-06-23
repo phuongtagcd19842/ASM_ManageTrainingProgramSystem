@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ASM_ManageTrainingProgramSystem.Models;
 using System.Runtime.Remoting.Contexts;
+using System.Net;
+using static ASM_ManageTrainingProgramSystem.Controllers.ManageController;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -185,7 +187,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                     _context.TrainersInfo.Add(TrainerInfo);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ShowTrainers", "Admin");
                 }
                 AddErrors(result);
             }
@@ -211,7 +213,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                     UserManager.AddToRole(user.Id, "Training Staff");
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ShowTrainingStaffs", "Admin");
                 }
                 AddErrors(result);
             }
@@ -387,6 +389,60 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminChangePasswordTrainer(string id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminChangePasswordTrainer(AdminChangePasswordViewModel model, string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            await UserManager.RemovePasswordAsync(id);
+            var newPassword = model.NewPassword;
+            await UserManager.AddPasswordAsync(id, newPassword);
+
+            return RedirectToAction("ShowTrainers", "Admin");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminChangePasswordTrainingStaff(string id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminChangePasswordTrainingStaff(AdminChangePasswordViewModel model, string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            await UserManager.RemovePasswordAsync(id);
+            var newPassword = model.NewPassword;
+            await UserManager.AddPasswordAsync(id, newPassword);
+
+            return RedirectToAction("ShowTrainingStaffs", "Admin");
         }
 
         //
