@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
+    [Authorize(Roles ="Training Staff")]
     public class TrainerProfilesController : Controller
     {
         private ApplicationDbContext _context;
@@ -57,5 +59,17 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult ViewCourses(string id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            var courses = _context.TrainerCourses
+                .Include(c => c.Course)
+                .Where(c => c.UserId.Equals(id))
+                .Select(c => c.Course);
+
+            return View(courses);
+        }
     }
 }

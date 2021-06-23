@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
+    [Authorize(Roles ="Training Staff")]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext _context;
