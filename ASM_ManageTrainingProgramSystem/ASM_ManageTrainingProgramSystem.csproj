@@ -208,12 +208,17 @@
     <Compile Include="Migrations\202106231123029_AddTraineeInfoesTable.Designer.cs">
       <DependentUpon>202106231123029_AddTraineeInfoesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106231247135_AddTraineeCoursesTable.cs" />
+    <Compile Include="Migrations\202106231247135_AddTraineeCoursesTable.Designer.cs">
+      <DependentUpon>202106231247135_AddTraineeCoursesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TraineeCourse.cs" />
     <Compile Include="Models\TraineeInfo.cs" />
     <Compile Include="Models\TrainerCourse.cs" />
     <Compile Include="Models\TrainerInfo.cs" />
@@ -305,6 +310,7 @@
     <Content Include="Views\Account\CreateTrainee.cshtml" />
     <Content Include="Views\Trainees\Index.cshtml" />
     <Content Include="Views\Trainees\ViewAllCourses.cshtml" />
+    <Content Include="Views\TraineesList\ViewCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -340,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106231123029_AddTraineeInfoesTable.resx">
       <DependentUpon>202106231123029_AddTraineeInfoesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106231247135_AddTraineeCoursesTable.resx">
+      <DependentUpon>202106231247135_AddTraineeCoursesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
