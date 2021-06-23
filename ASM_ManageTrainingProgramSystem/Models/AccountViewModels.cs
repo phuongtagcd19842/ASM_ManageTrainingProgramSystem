@@ -132,6 +132,42 @@ namespace ASM_ManageTrainingProgramSystem.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class TraineeRegisterViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Username")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Trainee Name")]
+        public string TraineeName { get; set; }
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+        [Display(Name = "Date Of Birth")]
+        public string DateOfBirth { get; set; }
+        public string Education { get; set; }
+        [Display(Name = "Programming Language")]
+        public string ProgrammingLanguage { get; set; }
+        [Display(Name = "TOEIC Score")]
+        public float TOEICScore { get; set; }
+        [Display(Name = "Experience Detail")]
+        public string ExperienceDetail { get; set; }
+        public string Department { get; set; }
+        public string Location { get; set; }
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]
