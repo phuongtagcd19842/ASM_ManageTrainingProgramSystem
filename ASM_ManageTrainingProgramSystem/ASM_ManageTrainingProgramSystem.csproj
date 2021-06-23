@@ -177,6 +177,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TraineesController.cs" />
     <Compile Include="Controllers\TraineesListController.cs" />
     <Compile Include="Controllers\TrainerProfilesController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
@@ -302,6 +303,8 @@
     <Content Include="Views\TraineesList\Details.cshtml" />
     <Content Include="Views\TraineesList\Edit.cshtml" />
     <Content Include="Views\Account\CreateTrainee.cshtml" />
+    <Content Include="Views\Trainees\Index.cshtml" />
+    <Content Include="Views\Trainees\ViewAllCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

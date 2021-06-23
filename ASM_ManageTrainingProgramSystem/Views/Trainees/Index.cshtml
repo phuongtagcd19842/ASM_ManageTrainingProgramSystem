@@ -1,0 +1,20 @@
+﻿@model ASM_ManageTrainingProgramSystem.Models.TraineeInfo
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My Profile</h2>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Name: @Model.TraineeName</div>
+    <div class="panel-body">
+        <p>Age: @Model.Age</p>
+        <p>Date Of Birth: @Model.DateOfBirth</p>
+        <p>Education: @Model.Education</p>
+        <p>Programming Language: @Model.ProgrammingLanguage</p>
+        <p>TOEIC Score: @Model.TOEICScore</p>
+        <p>Experience Detail: @Model.ExperienceDetail</p>
+        <p>Department: @Model.Department</p>
+        <p>Location: @Model.Location</p>
+    </div>
+</div>
