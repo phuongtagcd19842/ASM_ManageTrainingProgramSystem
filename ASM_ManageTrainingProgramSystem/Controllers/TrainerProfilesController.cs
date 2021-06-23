@@ -11,7 +11,7 @@ using ASM_ManageTrainingProgramSystem.ViewModels;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
-    [Authorize(Roles ="Training Staff")]
+    [Authorize(Roles = "Training Staff")]
     public class TrainerProfilesController : Controller
     {
         private ApplicationDbContext _context;
@@ -68,30 +68,25 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 .Where(c => c.UserId.Equals(id))
                 .Select(c => c.Course);
 
-            ViewBag.UserId = id;
-
             return View(courses);
         }
-
         [HttpGet]
         public ActionResult AssignCourse(string id)
         {
             if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             if (_context.TrainersInfo.SingleOrDefault(t => t.UserId.Equals(id)).Equals(null)) return HttpNotFound();
-
             var coursesInDb = _context.Courses.ToList();
 
-            var assignCourse = _context.TrainerCourses
+            var assignCourses = _context.TrainerCourses
                 .Include(a => a.Course)
                 .Where(a => a.UserId.Equals(id))
                 .Select(a => a.Course)
                 .ToList();
-
             var coursesToAdd = new List<Course>();
-
+            
             foreach(var course in coursesInDb)
             {
-                if(!coursesInDb.Contains(course))
+                if(!assignCourses.Contains(course))
                 {
                     coursesToAdd.Add(course);
                 }    
@@ -99,13 +94,11 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
             var viewModel = new TrainerCoursesViewModel
             {
-                UserId = (string)id,
+                UserId = id,
                 Courses = coursesToAdd
             };
-
             return View(viewModel);
         }
-
         [HttpPost]
         public ActionResult AssignCourse(TrainerCourse model)
         {
@@ -117,7 +110,6 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
             _context.TrainerCourses.Add(trainerCourse);
             _context.SaveChanges();
-
             return RedirectToAction("ViewCourses", new { id = model.UserId});
         }
     }

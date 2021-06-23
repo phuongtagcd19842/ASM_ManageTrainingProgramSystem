@@ -11,9 +11,8 @@
         Course name:
         @Html.HiddenFor(t => t.UserId)
         @Html.DropDownListFor(t => t.CourseId,
-                            new SelectList(Model.Courses, "Id", "CourseName"),
-                            new {@class = "form-control"}
-                            )
+            new SelectList(Model.Courses, "Id", "CourseName"),
+            new { @class = "form-control" })
     </div>
     <div class="form-group">
         <button class="btn btn-primary" type="submit">Assign</button>
