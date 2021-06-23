@@ -42,6 +42,12 @@
                         new { id = trainerInfo.UserId },
                         new { @class = "btn btn-default" }
                    )
+                    @Html.ActionLink("Assign Course",
+                        "AssignCourse",
+                        "TrainerProfiles",
+                        new { id = trainerInfo.UserId },
+                        new { @class = "btn btn-success" }
+                   )
                 </td>
             </tr>
         }

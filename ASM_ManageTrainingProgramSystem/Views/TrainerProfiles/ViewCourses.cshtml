@@ -3,13 +3,13 @@
     ViewBag.Title = "ViewCourses";
 }
 
-<h2>View Courses</h2>
+<h2>View All Trainer Courses</h2>
 
 <div class="row">
     <div class="col-md-4">
         <ul class="list-group">
             <li class="list-group-item active">
-                Courses Trainer is assigned
+                Trainer Courses:
                 <span class="badge">@Model.Count()</span>
             </li>
             @foreach (var course in Model)
@@ -21,7 +21,7 @@
                             @Html.ActionLink("Change",
                               "ChangeCourse",
                               "TrainerProfiles",
-                              null,
+                              new { id = ViewBag.UserId, courseId = course.Id },
                               new { @class = "link" }
                             )
                         </span>
@@ -29,23 +29,13 @@
                             @Html.ActionLink("Remove",
                             "RemoveCourses",
                             "TrainerProfiles",
-                            null,
+                            new { id = ViewBag.UserId, userId = course.Id },
                             new { @class = "text-danger text-right  " }
                         )
                         </span>
                     </div>
-
-
                 </li>
             }
         </ul>
     </div>
-</div>
-<div class="form-group">
-    @Html.ActionLink("Assign",
-                     "AssignCourse",
-                     "TrainerProfiles",
-                     null,
-                     new { @class = "btn btn-primary" }
-                     )
 </div>

@@ -215,6 +215,7 @@
     <Compile Include="UniqueAttribute\Unique.cs" />
     <Compile Include="ViewModels\ChangePasswordTrainerViewModel.cs" />
     <Compile Include="ViewModels\CourseCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\TrainerCoursesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

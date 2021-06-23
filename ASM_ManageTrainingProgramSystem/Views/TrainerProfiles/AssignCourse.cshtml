@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.Course>
+﻿@model ASM_ManageTrainingProgramSystem.ViewModels.TrainerCoursesViewModel
 @{
     ViewBag.Title = "AssignCourse";
 }
@@ -9,9 +9,11 @@
 {
     <div class="form-group">
         Course name:
-        @Html.DropDownList("CourseName",
-            new SelectList(Model, "Id", "CourseName"),
-            new { @class = "form-control" })
+        @Html.HiddenFor(t => t.UserId)
+        @Html.DropDownListFor(t => t.CourseId,
+                            new SelectList(Model.Courses, "Id", "CourseName"),
+                            new {@class = "form-control"}
+                            )
     </div>
     <div class="form-group">
         <button class="btn btn-primary" type="submit">Assign</button>

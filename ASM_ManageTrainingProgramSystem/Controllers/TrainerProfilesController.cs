@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using ASM_ManageTrainingProgramSystem.ViewModels;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -67,12 +68,17 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 .Where(c => c.UserId.Equals(id))
                 .Select(c => c.Course);
 
+            ViewBag.UserId = id;
+
             return View(courses);
         }
 
         [HttpGet]
         public ActionResult AssignCourse(string id)
         {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            if (_context.TrainersInfo.SingleOrDefault(t => t.UserId.Equals(id)).Equals(null)) return HttpNotFound();
+
             var coursesInDb = _context.Courses.ToList();
 
             var assignCourse = _context.TrainerCourses
@@ -89,9 +95,30 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 {
                     coursesToAdd.Add(course);
                 }    
-            }    
+            }
 
-            return View(coursesToAdd);
+            var viewModel = new TrainerCoursesViewModel
+            {
+                UserId = (string)id,
+                Courses = coursesToAdd
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AssignCourse(TrainerCourse model)
+        {
+            var trainerCourse = new TrainerCourse
+            {
+                UserId = model.UserId,
+                CourseId = model.CourseId
+            };
+
+            _context.TrainerCourses.Add(trainerCourse);
+            _context.SaveChanges();
+
+            return RedirectToAction("ViewCourses", new { id = model.UserId});
         }
     }
 }
