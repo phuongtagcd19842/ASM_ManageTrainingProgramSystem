@@ -104,5 +104,27 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 .Select(c => c.Course);
             return View(courses);
         }
+
+        [HttpGet]
+        public ActionResult AssignCourses(string id)
+        {
+            var coursesInDb = _context.Courses.ToList();
+
+            var assignCourses = _context.TraineeCourses
+                .Include(a => a.Course)
+                .Where(a => a.UserId.Equals(id))
+                .Select(a => a.Course)
+                .ToList();
+            var coursesToAdd = new List<Course>();
+
+            foreach(var course in coursesInDb)
+            {
+                if(!assignCourses.Contains(course))
+                {
+                    coursesToAdd.Add(course);
+                }    
+            }    
+            return View(coursesToAdd);
+        }
     }
 }
