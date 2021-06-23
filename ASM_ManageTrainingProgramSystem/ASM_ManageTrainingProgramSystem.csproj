@@ -177,6 +177,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TraineesListController.cs" />
     <Compile Include="Controllers\TrainerProfilesController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,12 +203,17 @@
     <Compile Include="Migrations\202106192158203_AddTrainerCoursesTable.Designer.cs">
       <DependentUpon>202106192158203_AddTrainerCoursesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106231123029_AddTraineeInfoesTable.cs" />
+    <Compile Include="Migrations\202106231123029_AddTraineeInfoesTable.Designer.cs">
+      <DependentUpon>202106231123029_AddTraineeInfoesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TraineeInfo.cs" />
     <Compile Include="Models\TrainerCourse.cs" />
     <Compile Include="Models\TrainerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -292,6 +298,10 @@
     <Content Include="Views\TrainerProfiles\Edit.cshtml" />
     <Content Include="Views\TrainerProfiles\ViewCourses.cshtml" />
     <Content Include="Views\TrainerProfiles\AssignCourse.cshtml" />
+    <Content Include="Views\TraineesList\Index.cshtml" />
+    <Content Include="Views\TraineesList\Details.cshtml" />
+    <Content Include="Views\TraineesList\Edit.cshtml" />
+    <Content Include="Views\Account\CreateTrainee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106192158203_AddTrainerCoursesTable.resx">
       <DependentUpon>202106192158203_AddTrainerCoursesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106231123029_AddTraineeInfoesTable.resx">
+      <DependentUpon>202106231123029_AddTraineeInfoesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

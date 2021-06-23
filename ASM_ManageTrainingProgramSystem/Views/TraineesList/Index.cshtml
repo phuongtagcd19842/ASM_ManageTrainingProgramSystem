@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Trainees List</h2>
+
+@Html.ActionLink("Create a new Trainee",
+                        "CreateTrainee",
+                        "Account",
+                        null,
+                        new { @class = "btn btn-primary" }
+                   )
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var traineeInfo in Model)
+        {
+            <tr>
+                <td>@traineeInfo.UserName</td>
+                <td>
+                    <!--Details button-->
+                    @Html.ActionLink("Details",
+                        "Details",
+                        "TraineesList",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-info" }
+                   )
+                    <!--Edit button-->
+                    @Html.ActionLink("Edit",
+                        "Edit",
+                        "TraineesList",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-default" }
+                   )
+                    <!--Delete button-->
+                    @Html.ActionLink("Delete",
+                        "Delete",
+                        "TraineesList",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-danger" }
+                   )
+                    @Html.ActionLink("View Courses",
+                        "ViewCourses",
+                        "TraineesList",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-primary" }
+                    )
+                    @Html.ActionLink("Assign Courses",
+                        "AssignCourses",
+                        "TraineesList",
+                        new { id = traineeInfo.Id },
+                        new { @class = "btn btn-success" }
+                    )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
