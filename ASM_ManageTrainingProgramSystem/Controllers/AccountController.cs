@@ -185,7 +185,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                     _context.TrainersInfo.Add(TrainerInfo);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ShowTrainers", "Admin");
                 }
                 AddErrors(result);
             }
@@ -211,7 +211,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                     UserManager.AddToRole(user.Id, "Training Staff");
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ShowTrainingStaffs", "Admin");
                 }
                 AddErrors(result);
             }
