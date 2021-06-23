@@ -391,7 +391,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult AdminChangePassword(string id)
+        public ActionResult AdminChangePasswordTrainer(string id)
         {
             return View();
         }
@@ -401,7 +401,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AdminChangePassword(AdminChangePasswordViewModel model, string id)
+        public async Task<ActionResult> AdminChangePasswordTrainer(AdminChangePasswordViewModel model, string id)
         {
             var user = await UserManager.FindByIdAsync(id);
             if (user == null)
@@ -413,7 +413,35 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             await UserManager.RemovePasswordAsync(id);
             var newPassword = model.NewPassword;
             await UserManager.AddPasswordAsync(id, newPassword);
+
             return RedirectToAction("ShowTrainers", "Admin");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminChangePasswordTrainingStaff(string id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminChangePasswordTrainingStaff(AdminChangePasswordViewModel model, string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            await UserManager.RemovePasswordAsync(id);
+            var newPassword = model.NewPassword;
+            await UserManager.AddPasswordAsync(id, newPassword);
+
+            return RedirectToAction("ShowTrainingStaff", "Admin");
         }
 
         //
