@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using ASM_ManageTrainingProgramSystem.ViewModels;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -108,6 +109,9 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         [HttpGet]
         public ActionResult AssignCourses(string id)
         {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            if (_context.TraineeCourses.SingleOrDefault(t => t.UserId.Equals(id)) == null) return HttpNotFound();
+
             var coursesInDb = _context.Courses.ToList();
 
             var assignCourses = _context.TraineeCourses
@@ -123,8 +127,13 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 {
                     coursesToAdd.Add(course);
                 }    
-            }    
-            return View(coursesToAdd);
+            }
+            var viewModel = new TraineeCoursesViewModel
+            {
+                UserId = id,
+                Courses = coursesToAdd
+            };
+            return View(viewModel);
         }
     }
 }
