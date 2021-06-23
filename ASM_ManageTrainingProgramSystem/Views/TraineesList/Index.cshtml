@@ -4,13 +4,24 @@
 }
 
 <h2>Trainees List</h2>
-
-@Html.ActionLink("Create a new Trainee",
+<div class="form-group">
+    @Html.ActionLink("Create a new Trainee",
                         "CreateTrainee",
                         "Account",
                         null,
                         new { @class = "btn btn-primary" }
                    )
+</div>
+
+<div class="form-group">
+    @using (Html.BeginForm("Index", "TraineesList", FormMethod.Get))
+    {
+        <div class="form-group">
+            @Html.TextBox("searchString", null, new { @placeholder = "Search Trainee by Username", required = "required" })
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    }
+</div>
 
 <table class="table">
     <thead class="thead-light">
