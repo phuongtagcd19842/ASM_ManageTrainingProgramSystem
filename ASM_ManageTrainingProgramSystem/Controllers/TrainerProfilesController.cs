@@ -68,6 +68,8 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 .Where(c => c.UserId.Equals(id))
                 .Select(c => c.Course);
 
+            ViewBag.UserId = id;
+
             return View(courses);
         }
         [HttpGet]
@@ -111,6 +113,16 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             _context.TrainerCourses.Add(trainerCourse);
             _context.SaveChanges();
             return RedirectToAction("ViewCourses", new { id = model.UserId});
+        }
+        public ActionResult RemoveCourse(string id, int courseId)
+        {
+            var courseToRemove = _context.TrainerCourses
+                .SingleOrDefault(c => c.UserId.Equals(id) && c.CourseId == courseId);
+            if (courseToRemove == null) return HttpNotFound();
+
+            _context.TrainerCourses.Remove(courseToRemove);
+            _context.SaveChanges();
+            return RedirectToAction("ViewCourses", new { id =id });
         }
     }
 }

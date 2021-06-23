@@ -23,6 +23,11 @@ namespace ASM_ManageTrainingProgramSystem
                     url: "{controller}/{action}/{id}/{courseId}",
                     new { controller = "TraineesList", action = "RemoveCourse", id = "", courseId = "" }
             );
+            routes.MapRoute(
+                    name: "RemoveCourseForTrainer",
+                    url: "{controller}/{action}/{id}/{courseId}",
+                    new { controller = "TrainerProfiles", action = "RemoveCourse", id = "", courseId = "" }
+            );
         }
     }
 }
