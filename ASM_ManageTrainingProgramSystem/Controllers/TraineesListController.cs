@@ -110,7 +110,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         public ActionResult AssignCourses(string id)
         {
             if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            if (_context.TraineeCourses.SingleOrDefault(t => t.UserId.Equals(id)) == null) return HttpNotFound();
+            if (_context.TraineesInfo.SingleOrDefault(t => t.UserId.Equals(id)).Equals(null)) return HttpNotFound();
 
             var coursesInDb = _context.Courses.ToList();
 
@@ -134,6 +134,20 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 Courses = coursesToAdd
             };
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AssignCourses(TraineeCourse model)
+        {
+            var traineeCourse = new TraineeCourse
+            {
+                UserId = model.UserId,
+                CourseId = model.CourseId
+            };
+
+            _context.TraineeCourses.Add(traineeCourse);
+            _context.SaveChanges();
+            return RedirectToAction("ViewCourses", new { id = model.UserId});
         }
     }
 }
