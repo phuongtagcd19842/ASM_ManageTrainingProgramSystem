@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ASM_ManageTrainingProgramSystem.Models;
 using System.Runtime.Remoting.Contexts;
+using System.Net;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -387,6 +388,32 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminChangePassword(string id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminChangePassword(AdminChangePasswordViewModel model, string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            await UserManager.RemovePasswordAsync(id);
+            var newPassword = model.NewPassword;
+            await UserManager.AddPasswordAsync(id, newPassword);
+            return RedirectToAction("ShowTrainers", "Admin");
         }
 
         //

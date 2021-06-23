@@ -189,6 +189,11 @@ namespace ASM_ManageTrainingProgramSystem.Models
         public string Code { get; set; }
     }
 
+    public class AdminChangePasswordViewModel
+    {
+
+    }
+
     public class ForgotPasswordViewModel
     {
         [Required]
