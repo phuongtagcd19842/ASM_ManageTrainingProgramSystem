@@ -10,6 +10,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
+    [Authorize(Roles ="Training Staff")]
     public class CoursesController : Controller
     {
         private ApplicationDbContext _context;
