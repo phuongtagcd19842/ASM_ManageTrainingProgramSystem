@@ -11,7 +11,7 @@ using ASM_ManageTrainingProgramSystem.ViewModels;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
-    [Authorize(Roles ="Training Staff")]
+    [Authorize(Roles = "Training Staff")]
     public class TrainerProfilesController : Controller
     {
         private ApplicationDbContext _context;
@@ -72,26 +72,23 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
             return View(courses);
         }
-
         [HttpGet]
         public ActionResult AssignCourse(string id)
         {
             if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             if (_context.TrainersInfo.SingleOrDefault(t => t.UserId.Equals(id)).Equals(null)) return HttpNotFound();
-
             var coursesInDb = _context.Courses.ToList();
 
-            var assignCourse = _context.TrainerCourses
+            var assignCourses = _context.TrainerCourses
                 .Include(a => a.Course)
                 .Where(a => a.UserId.Equals(id))
                 .Select(a => a.Course)
                 .ToList();
-
             var coursesToAdd = new List<Course>();
-
+            
             foreach(var course in coursesInDb)
             {
-                if(!coursesInDb.Contains(course))
+                if(!assignCourses.Contains(course))
                 {
                     coursesToAdd.Add(course);
                 }    
@@ -99,13 +96,11 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
             var viewModel = new TrainerCoursesViewModel
             {
-                UserId = (string)id,
+                UserId = id,
                 Courses = coursesToAdd
             };
-
             return View(viewModel);
         }
-
         [HttpPost]
         public ActionResult AssignCourse(TrainerCourse model)
         {
@@ -117,8 +112,17 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
 
             _context.TrainerCourses.Add(trainerCourse);
             _context.SaveChanges();
-
             return RedirectToAction("ViewCourses", new { id = model.UserId});
+        }
+        public ActionResult RemoveCourse(string id, int courseId)
+        {
+            var courseToRemove = _context.TrainerCourses
+                .SingleOrDefault(c => c.UserId.Equals(id) && c.CourseId == courseId);
+            if (courseToRemove == null) return HttpNotFound();
+
+            _context.TrainerCourses.Remove(courseToRemove);
+            _context.SaveChanges();
+            return RedirectToAction("ViewCourses", new { id =id });
         }
     }
 }

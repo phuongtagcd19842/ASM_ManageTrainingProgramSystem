@@ -11,9 +11,9 @@ namespace ASM_ManageTrainingProgramSystem.Models
     {
 		[Key]
 		[Column(Order = 1)]
-		[ForeignKey("Trainer")]
+		[ForeignKey("TrainerInfo")]
 		public string UserId { get; set; }
-		public TrainerInfo Trainer { get; set; }
+		public TrainerInfo TrainerInfo { get; set; }
 
 		[Key]
 		[Column(Order = 2)]

@@ -18,18 +18,10 @@
                     @course.CourseName
                     <div class="text-right">
                         <span>
-                            @Html.ActionLink("Change",
-                              "ChangeCourse",
-                              "TrainerProfiles",
-                              new { id = ViewBag.UserId, courseId = course.Id },
-                              new { @class = "link" }
-                            )
-                        </span>
-                        <span>
                             @Html.ActionLink("Remove",
-                            "RemoveCourses",
+                            "RemoveCourse",
                             "TrainerProfiles",
-                            new { id = ViewBag.UserId, userId = course.Id },
+                            new { id = ViewBag.UserId, courseId = course.Id },
                             new { @class = "text-danger text-right  " }
                         )
                         </span>

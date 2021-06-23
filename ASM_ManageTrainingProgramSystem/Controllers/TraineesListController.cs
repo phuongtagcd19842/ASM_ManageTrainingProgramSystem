@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using ASM_ManageTrainingProgramSystem.ViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -22,10 +23,15 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
         }
         // GET: TraineesList
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             var users = _context.Users.ToList();
 
+            if (!searchString.IsNullOrWhiteSpace())
+            {
+                users = users.Where((c => c.UserName.Contains(searchString))).ToList();
+            }
+                
             var Trainees = new List<ApplicationUser>();
 
             foreach (var user in users)
@@ -35,6 +41,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                     Trainees.Add(user);
                 }
             }
+
             return View(Trainees);
         }
 

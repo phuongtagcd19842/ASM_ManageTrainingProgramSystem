@@ -13,7 +13,11 @@
     }
     @if (User.IsInRole("Training Staff"))
     {
-    <h1>Welcome Training Staff</h1>
+        <h1>Welcome Training Staff</h1>
+    }
+    @if(User.IsInRole("Trainee"))
+    {
+    <h1>Welcome Trainee</h1>
     }
 
     <h2>FPT Manage Training Program System</h2>
