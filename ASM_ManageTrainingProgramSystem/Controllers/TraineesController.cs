@@ -35,5 +35,17 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 .ToList();
             return View(courses);
         }
+
+        public ActionResult MyCourses()
+        {
+            var userId = User.Identity.GetUserId();
+            var myCourses = _context.TraineeCourses
+                .Include(m => m.Course)
+                .Where(m => m.UserId.Equals(userId))
+                .Select(m => m.Course)
+                .ToList();
+            if (myCourses == null) return HttpNotFound();
+            return View(myCourses);
+        }
     }
 }

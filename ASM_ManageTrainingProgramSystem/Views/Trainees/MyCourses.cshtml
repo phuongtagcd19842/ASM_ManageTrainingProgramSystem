@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.Course>
+@{
+    ViewBag.Title = "MyCourses";
+}
+
+<h2>My Courses</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item active">
+                Courses:
+                <span class="badge">@Model.Count()</span>
+            </li>
+            @foreach (var course in Model)
+            {
+                <li class="list-group-item">
+                    @course.CourseName
+                </li>
+            }
+        </ul>
+    </div>
+</div>
