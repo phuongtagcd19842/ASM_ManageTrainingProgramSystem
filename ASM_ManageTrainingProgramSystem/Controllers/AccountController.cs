@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using ASM_ManageTrainingProgramSystem.Models;
 using System.Runtime.Remoting.Contexts;
 using System.Net;
+using static ASM_ManageTrainingProgramSystem.Controllers.ManageController;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -441,7 +442,7 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             var newPassword = model.NewPassword;
             await UserManager.AddPasswordAsync(id, newPassword);
 
-            return RedirectToAction("ShowTrainingStaff", "Admin");
+            return RedirectToAction("ShowTrainingStaffs", "Admin");
         }
 
         //
