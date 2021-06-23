@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using ASM_ManageTrainingProgramSystem.ViewModels;
 
 namespace ASM_ManageTrainingProgramSystem.Controllers
 {
@@ -90,6 +92,76 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult ViewCourses(string id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            var courses = _context.TraineeCourses
+                .Include(c => c.Course)
+                .Where(c => c.UserId.Equals(id))
+                .Select(c => c.Course);
+            ViewBag.UserId = id;
+            return View(courses);
+        }
+
+        [HttpGet]
+        public ActionResult AssignCourses(string id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            if (_context.TraineesInfo.SingleOrDefault(t => t.UserId.Equals(id)).Equals(null)) return HttpNotFound();
+
+            var coursesInDb = _context.Courses.ToList();
+
+            var assignCourses = _context.TraineeCourses
+                .Include(a => a.Course)
+                .Where(a => a.UserId.Equals(id))
+                .Select(a => a.Course)
+                .ToList();
+            var coursesToAdd = new List<Course>();
+
+            foreach(var course in coursesInDb)
+            {
+                if(!assignCourses.Contains(course))
+                {
+                    coursesToAdd.Add(course);
+                }    
+            }
+            var viewModel = new TraineeCoursesViewModel
+            {
+                UserId = id,
+                Courses = coursesToAdd
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AssignCourses(TraineeCourse model)
+        {
+            var traineeCourse = new TraineeCourse
+            {
+                UserId = model.UserId,
+                CourseId = model.CourseId
+            };
+
+            _context.TraineeCourses.Add(traineeCourse);
+            _context.SaveChanges();
+            return RedirectToAction("ViewCourses", new { id = model.UserId});
+        }
+
+        [HttpGet]
+        public ActionResult RemoveCourse(string id, int courseId)
+        {
+            var traineeCourseToRemove = _context.TraineeCourses
+                .SingleOrDefault(t => t.UserId.Equals(id) && t.CourseId.Equals(courseId));
+
+            if (traineeCourseToRemove == null) return HttpNotFound();
+
+            _context.TraineeCourses.Remove(traineeCourseToRemove);
+            _context.SaveChanges();
+            return RedirectToAction("ViewCourses", new { id = id });
         }
     }
 }

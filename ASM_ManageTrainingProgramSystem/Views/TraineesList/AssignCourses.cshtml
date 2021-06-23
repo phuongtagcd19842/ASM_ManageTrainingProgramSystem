@@ -1,0 +1,21 @@
+﻿@model ASM_ManageTrainingProgramSystem.ViewModels.TraineeCoursesViewModel
+@{
+    ViewBag.Title = "AssignCourses";
+}
+
+<h2>Assign Courses</h2>
+
+@using (Html.BeginForm("AssignCourses", "TraineesList", FormMethod.Post))
+{
+    <div class="form-group">
+        Course Name:
+        @Html.HiddenFor(m => m.UserId)
+        @Html.DropDownListFor(m => m.CourseId,
+            new SelectList(Model.Courses, "Id", "CourseName"),
+            new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Assign</button>
+    </div>
+}
+
