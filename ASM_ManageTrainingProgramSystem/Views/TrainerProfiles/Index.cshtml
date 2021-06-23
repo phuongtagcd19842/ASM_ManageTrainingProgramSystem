@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.TrainerInfo>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Trainers</h2>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Trainer Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Working place</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Email address</th>
+            <th scope="col">Courses</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trainerInfo in Model)
+        {
+            <tr>
+                <td>@trainerInfo.TrainerName</td>
+                <td>@trainerInfo.ExternalOrInternal</td>
+                <td>@trainerInfo.WorkingPlace</td>
+                <td>@trainerInfo.Telephone</td>
+                <td>@trainerInfo.EmailAddress</td>
+                <td>
+                    @Html.ActionLink("Courses",
+                        "AssignCourse",
+                        "TrainerProfiles",
+                        new { id = trainerInfo.UserId },
+                        new { @class = "link" }
+                   )
+                </td>
+                <td>
+                    <!--Edit button-->
+                    @Html.ActionLink("Edit",
+                        "Edit",
+                        "TrainerProfiles",
+                        new { id = trainerInfo.UserId },
+                        new { @class = "btn btn-default" }
+                   )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
