@@ -14,7 +14,19 @@
             </li>
             @foreach (var course in Model)
             {
-                 <li class="list-group-item">@course.CourseName</li>
+                <li class="list-group-item">
+                    @course.CourseName
+                    <div class="float-right">
+                        <span>
+                            @Html.ActionLink("Remove",
+                                             "RemoveCourse",
+                                             "TraineesList",
+                                             new { id = ViewBag.UserId, courseId = course.Id },
+                                             new { @class = "text-danger" }
+                                             )
+                        </span>
+                    </div>
+                </li>
             }
         </ul>
     </div>
