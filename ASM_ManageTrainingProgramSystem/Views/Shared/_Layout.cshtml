@@ -32,13 +32,8 @@
                         <li> @Html.ActionLink("My Profile", "Index", "Trainers") </li>
                         <li> @Html.ActionLink("My Assiged Courses", "ViewAssignedCourse", "Trainers") </li>
                     }
-                    else if (User.IsInRole("Training Staff"))
-                    {
-                        
                         <li>@Html.ActionLink("Categories List", "Index", "Categories")</li>
                         <li>@Html.ActionLink("Courses List", "Index", "Courses")</li>
-                        <li>@Html.ActionLink("Trainers List", "Index", "TrainerProfiles")</li>
-                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

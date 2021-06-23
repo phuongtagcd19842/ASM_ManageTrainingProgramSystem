@@ -177,6 +177,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TrainerProfilesController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -214,6 +215,7 @@
     <Compile Include="UniqueAttribute\Unique.cs" />
     <Compile Include="ViewModels\ChangePasswordTrainerViewModel.cs" />
     <Compile Include="ViewModels\CourseCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\TrainerCoursesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -286,6 +288,10 @@
     <Content Include="Views\Admin\ChangePassword.cshtml" />
     <Content Include="Views\Admin\EditTrainingStaff.cshtml" />
     <Content Include="Views\Trainers\ViewAssignedCourse.cshtml" />
+    <Content Include="Views\TrainerProfiles\Index.cshtml" />
+    <Content Include="Views\TrainerProfiles\Edit.cshtml" />
+    <Content Include="Views\TrainerProfiles\ViewCourses.cshtml" />
+    <Content Include="Views\TrainerProfiles\AssignCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
