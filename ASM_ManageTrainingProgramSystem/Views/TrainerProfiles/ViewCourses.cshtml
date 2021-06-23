@@ -14,8 +14,38 @@
             </li>
             @foreach (var course in Model)
             {
-                <li class="list-group-item">@course.CourseName</li>
+                <li class="list-group-item">
+                    @course.CourseName
+                    <div class="text-right">
+                        <span>
+                            @Html.ActionLink("Change",
+                              "ChangeCourse",
+                              "TrainerProfiles",
+                              null,
+                              new { @class = "link" }
+                            )
+                        </span>
+                        <span>
+                            @Html.ActionLink("Remove",
+                            "RemoveCourses",
+                            "TrainerProfiles",
+                            null,
+                            new { @class = "text-danger text-right  " }
+                        )
+                        </span>
+                    </div>
+
+
+                </li>
             }
         </ul>
     </div>
+</div>
+<div class="form-group">
+    @Html.ActionLink("Assign",
+                     "AssignCourse",
+                     "TrainerProfiles",
+                     null,
+                     new { @class = "btn btn-primary" }
+                     )
 </div>

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ASM_ManageTrainingProgramSystem.Models.Course>
+@{
+    ViewBag.Title = "AssignCourse";
+}
+
+<h2>Assign Course</h2>
+
+@using (Html.BeginForm("AssignCourse", "TrainerProfiles", FormMethod.Post))
+{
+    <div class="form-group">
+        Course name:
+        @Html.DropDownList("CourseName",
+            new SelectList(Model, "Id", "CourseName"),
+            new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Assign</button>
+    </div>
+}

@@ -14,11 +14,9 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
     public class TrainerProfilesController : Controller
     {
         private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> _userManager;
         public TrainerProfilesController()
         {
             _context = new ApplicationDbContext();
-            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
         }
 
         // GET: TrainerProfiles
@@ -70,6 +68,30 @@ namespace ASM_ManageTrainingProgramSystem.Controllers
                 .Select(c => c.Course);
 
             return View(courses);
+        }
+
+        [HttpGet]
+        public ActionResult AssignCourse(string id)
+        {
+            var coursesInDb = _context.Courses.ToList();
+
+            var assignCourse = _context.TrainerCourses
+                .Include(a => a.Course)
+                .Where(a => a.UserId.Equals(id))
+                .Select(a => a.Course)
+                .ToList();
+
+            var coursesToAdd = new List<Course>();
+
+            foreach(var course in coursesInDb)
+            {
+                if(!coursesInDb.Contains(course))
+                {
+                    coursesToAdd.Add(course);
+                }    
+            }    
+
+            return View(coursesToAdd);
         }
     }
 }
